@@ -1,10 +1,10 @@
-import { RecipeBuilder } from "@blitzjs/installer"
-import { join } from "path"
+import { RecipeBuilder } from "@blitzjs/installer";
+import { join } from "path";
 
 export default RecipeBuilder()
   .setName("🛡️  Blitz Guard")
   .setDescription(
-    `This recipe will install all necessary dependencies and configure Blitz Guard for immediate use.`,
+    `This recipe will install all necessary dependencies and configure Blitz Guard for immediate use.`
   )
   .setOwner("ntorres.dev@gmail.com")
   .setRepoLink("https://github.com/ntgussoni/blitz-guard")
@@ -12,7 +12,7 @@ export default RecipeBuilder()
     stepId: "addDeps",
     stepName: "Add npm dependencies",
     explanation: `Adding Blitz Guard dependencies`,
-    packages: [{ name: "blitz-guard", version: "latest" }],
+    packages: [{ name: "@blitz-guard/core", version: "latest" }],
   })
   .addNewFilesStep({
     stepId: "addApiRoute",
@@ -38,4 +38,4 @@ export default RecipeBuilder()
     templatePath: join(__dirname, "templates", "index.ts"),
     templateValues: {},
   })
-  .build()
+  .build();
