@@ -17,25 +17,18 @@ export default RecipeBuilder()
   .addNewFilesStep({
     stepId: "addApiRoute",
     stepName: "Add Api Route ",
-    explanation: `In order to use the useGuard react hook, we need to create an API endpoint.`,
+    explanation: `We'll setup a query API endpoint to for you to check your rules with useQuery`,
     targetDirectory: "app/guard/queries/getAbility.ts",
     templatePath: join(__dirname, "templates", "queries", "getAbility.ts"),
     templateValues: {},
   })
   .addNewFilesStep({
     stepId: "addAbilityFile",
-    stepName: "Add Ability Route ",
-    explanation: `All your rules must reside in the ability.ts file. Creating that for you now.`,
+    stepName: "Add Ability File ",
+    explanation: `One file to rule them all, this is the main file where your rules will live. Creating that for you now.`,
     targetDirectory: "app/guard/ability.ts",
     templatePath: join(__dirname, "templates", "ability.ts"),
     templateValues: {},
   })
-  .addNewFilesStep({
-    stepId: "addGuardMainFile",
-    stepName: "Add Guard main file ",
-    explanation: `We'll add a basic guard configuration file that will serve as entrypoint`,
-    targetDirectory: "app/guard/index.ts",
-    templatePath: join(__dirname, "templates", "index.ts"),
-    templateValues: {},
-  })
+
   .build();
