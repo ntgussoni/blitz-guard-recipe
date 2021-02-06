@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@blitzjs/installer": "0.24.3",
+    "@blitzjs/installer": "0.29.7",
     "jscodeshift": "0.10.0"
   },
   "prettier": {
