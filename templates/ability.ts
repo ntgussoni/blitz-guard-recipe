@@ -1,15 +1,13 @@
-import db from "db";
-import { GuardBuilder, PrismaModelsType } from "@blitz-guard/core";
+import db from "db"
+import { GuardBuilder, PrismaModelsType } from "@blitz-guard/core"
 
-type ExtendedResourceTypes =
-  | "comment"
-  | "article"
-  | PrismaModelsType<typeof db>;
+type ExtendedResourceTypes = "comment" | "article" | PrismaModelsType<typeof db>
 
-type ExtendedAbilityTypes = "send email";
+type ExtendedAbilityTypes = "send email"
 
 const Guard = GuardBuilder<ExtendedResourceTypes, ExtendedAbilityTypes>(
   async (ctx, { can, cannot }) => {
+    cannot("manage", "all")
     /*
 		Your rules go here, you can start by removing access to everything
 		and gradually adding the necessary permissions
@@ -32,6 +30,6 @@ const Guard = GuardBuilder<ExtendedResourceTypes, ExtendedAbilityTypes>(
 		}
     */
   }
-);
+)
 
-export default Guard;
+export default Guard

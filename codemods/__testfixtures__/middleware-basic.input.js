@@ -1,1 +1,1 @@
-module.exports = {middleware: []};
+module.exports = { middleware: [] }

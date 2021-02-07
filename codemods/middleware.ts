@@ -46,7 +46,7 @@ export const transform = (root: Collection<j.Program>): Collection<j.Program> =>
     .replaceWith(({ node }) => {
       node.elements.push(
         j.template
-          .expression`BlitzGuardMiddleware({excluded: ["/api/auth/mutations/login", "/api/auth/mutations/logout"]})`
+          .expression`BlitzGuardMiddleware({excluded: ["/api/auth/mutations/login", "/api/auth/mutations/logout", "/api/guard/queries/getAbility"]})`
       )
       return node
     })
