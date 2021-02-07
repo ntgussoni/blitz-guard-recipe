@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add middleware transforms correctly 1`] = `
+"const { BlitzGuardMiddleware } = require(\\"@blitz-guard/core/dist/middleware\\")
+module.exports = {
+  middleware: [
+    BlitzGuardMiddleware({
+      excluded: [
+        \\"/api/auth/mutations/login\\",
+        \\"/api/auth/mutations/logout\\",
+        \\"/api/guard/queries/getAbility\\",
+      ],
+    }),
+  ],
+}"
+`;
+
+exports[`add middleware transforms correctly 2`] = `
+"const { BlitzGuardMiddleware } = require(\\"@blitz-guard/core/dist/middleware\\");
+module.exports = { middleware: [BlitzGuardMiddleware(
+  {excluded: [\\"/api/auth/mutations/login\\", \\"/api/auth/mutations/logout\\", \\"/api/guard/queries/getAbility\\"]}
+)] }"
+`;
+
+exports[`add middleware transforms correctly 3`] = `
+"const { BlitzGuardMiddleware } = require(\\"@blitz-guard/core/dist/middleware\\");
+const { sessionMiddleware, simpleRolesIsAuthorized } = require(\\"@blitzjs/server\\")
+module.exports = { middleware: [
+  sessionMiddleware({ isAuthorized: simpleRolesIsAuthorized }),
+  BlitzGuardMiddleware(
+    {excluded: [\\"/api/auth/mutations/login\\", \\"/api/auth/mutations/logout\\", \\"/api/guard/queries/getAbility\\"]}
+  )
+] }"
+`;
+
+exports[`add middleware transforms correctly 4`] = `
+"const { BlitzGuardMiddleware } = require(\\"@blitz-guard/core/dist/middleware\\");
+const { sessionMiddleware, simpleRolesIsAuthorized } = require(\\"@blitzjs/server\\")
+module.exports = {
+  middleware: [
+    sessionMiddleware({ isAuthorized: simpleRolesIsAuthorized }),
+    BlitzGuardMiddleware(
+      {excluded: [\\"/api/auth/mutations/login\\", \\"/api/auth/mutations/logout\\", \\"/api/guard/queries/getAbility\\"]}
+    )
+  ],
+
+  /* Uncomment this to customize the webpack config
+webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+// Note: we provide webpack above so you should not \`require\` it
+// Perform customizations to webpack config
+// Important: return the modified config
+return config
+},
+  */
+}"
+`;
+
+exports[`add middleware transforms correctly 5`] = `
+"const { BlitzGuardMiddleware } = require(\\"@blitz-guard/core/dist/middleware\\");
+const { sessionMiddleware, simpleRolesIsAuthorized } = require(\\"@blitzjs/server\\")
+const withBundleAnalyzer = require(\\"@next/bundle-analyzer\\")({
+  enabled: process.env.ANALYZE === \\"true\\",
+})
+
+module.exports = withBundleAnalyzer({
+  middleware: [sessionMiddleware({
+    isAuthorized: simpleRolesIsAuthorized,
+    sessionExpiryMinutes: 4,
+  }), BlitzGuardMiddleware(
+    {excluded: [\\"/api/auth/mutations/login\\", \\"/api/auth/mutations/logout\\", \\"/api/guard/queries/getAbility\\"]}
+  )],
+  log: {
+    // level: \\"trace\\",
+  },
+  experimental: {
+    isomorphicResolverImports: false,
+  },
+  /*
+  webpack: (config, {buildId, dev, isServer, defaultLoaders, webpack}) => {
+    // Note: we provide webpack above so you should not \`require\` it
+    // Perform customizations to webpack config
+    // Important: return the modified config
+    return config
+  },
+  webpackDevMiddleware: (config) => {
+    // Perform customizations to webpack dev middleware config
+    // Important: return the modified config
+    return config
+  },
+  */
+})"
+`;
