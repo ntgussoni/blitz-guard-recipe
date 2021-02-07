@@ -31,8 +31,8 @@
     }
   },
   "dependencies": {
-    "@blitzjs/installer": "0.29.7",
-    "jscodeshift": "0.10.0"
+    "@blitzjs/installer": "0.30.0-canary.6",
+    "jscodeshift": "0.11.0"
   },
   "prettier": {
     "semi": false,

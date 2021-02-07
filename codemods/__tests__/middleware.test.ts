@@ -5,4 +5,5 @@ describe("add middleware", () => {
   defineTest(__dirname, "middleware", null, `middleware-basic`)
   defineTest(__dirname, "middleware", null, `middleware-with-middleware`)
   defineTest(__dirname, "middleware", null, `middleware-with-comments`)
+  defineTest(__dirname, "middleware", null, `middleware-real-blitz-config`)
 })
