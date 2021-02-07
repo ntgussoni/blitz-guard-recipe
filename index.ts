@@ -1,5 +1,9 @@
-import { RecipeBuilder } from "@blitzjs/installer";
-import { join } from "path";
+import { RecipeBuilder, paths } from "@blitzjs/installer"
+import { transform as MiddlewareCodemod } from "./codemods/middleware"
+import j from "jscodeshift"
+
+import { join } from "path"
+import { Collection } from "jscodeshift/src/Collection"
 
 export default RecipeBuilder()
   .setName("🛡️  Blitz Guard")
@@ -30,5 +34,14 @@ export default RecipeBuilder()
     templatePath: join(__dirname, "templates", "ability.ts"),
     templateValues: {},
   })
+  .addTransformFilesStep({
+    stepId: "addMiddleware",
+    stepName: "Add development middleware",
+    explanation: `Do you wish to add the development middleware to help you detect unprotected endpoints?`,
+    singleFileSearch: paths.blitzConfig(),
+    transform(program: Collection<j.Program>) {
+      return MiddlewareCodemod(program)
+    },
+  })
 
-  .build();
+  .build()
