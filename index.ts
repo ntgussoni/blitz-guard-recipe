@@ -4,6 +4,7 @@ import j from "jscodeshift"
 
 import { join } from "path"
 import { Collection } from "jscodeshift/src/Collection"
+import { Transformer } from "@blitzjs/installer/dist/declarations/src/utils/transform"
 
 export default RecipeBuilder()
   .setName("🛡️  Blitz Guard")
@@ -39,7 +40,7 @@ export default RecipeBuilder()
     stepName: "Add development middleware",
     explanation: `Do you wish to add the development middleware to help you detect unprotected endpoints?`,
     singleFileSearch: paths.blitzConfig(),
-    transform(program: Collection<j.Program>) {
+    transform(program) {
       return MiddlewareCodemod(program)
     },
   })

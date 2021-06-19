@@ -1,14 +1,14 @@
 // transforms/implicit-icons-to-explicit-imports.ts
-import { Transform } from "jscodeshift"
 import { Collection } from "jscodeshift/src/Collection"
 import j from "jscodeshift"
 import { customTsParser } from "@blitzjs/installer"
+import { Transformer } from "@blitzjs/installer/dist/declarations/src/utils/transform"
 /*
 Adds BlitzGuardMiddleware to blitz.config.js
 */
 
-export const transform = (root: Collection<j.Program>): Collection<j.Program> => {
-  const alreadyImported = root.find(j.VariableDeclaration, {
+export const transform: Transformer = (program) => {
+  const alreadyImported = program.find(j.VariableDeclaration, {
     declarations: [
       {
         type: "VariableDeclarator",
@@ -25,15 +25,15 @@ export const transform = (root: Collection<j.Program>): Collection<j.Program> =>
   })
 
   if (alreadyImported.length > 0) {
-    return root
+    return program
   }
 
-  root
+  program
     .get()
     .node.program.body.unshift(
       `const { BlitzGuardMiddleware } = require("@blitz-guard/core/dist/middleware");`
     )
-  root
+  program
     .find(j.AssignmentExpression, {
       operator: "=",
       left: {
@@ -51,12 +51,12 @@ export const transform = (root: Collection<j.Program>): Collection<j.Program> =>
       return node
     })
 
-  return root
+  return program
 }
 
-const Program: Transform = (file) => {
+const Program = (file) => {
   const root = j(file.source, { parser: customTsParser })
-  return transform(root).toSource()
+  return (transform(root) as Collection<j.Program>).toSource()
 }
 
 export default Program
