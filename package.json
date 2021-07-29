@@ -26,25 +26,25 @@
   },
   "homepage": "https://github.com/ntgussoni/blitz-guard#readme",
   "dependencies": {
-    "@blitzjs/installer": "^0.38.0",
-    "jscodeshift": "^0.12.0"
+    "@blitzjs/installer": "^0.38.6",
+    "jscodeshift": "^0.13.0"
   },
   "prettier": {
     "semi": false,
     "printWidth": 100
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.5",
-    "@types/jest": "^26.0.23",
-    "@types/jscodeshift": "^0.11.0",
-    "babel-jest": "^27.0.2",
-    "husky": "^6.0.0",
-    "jest": "^27.0.4",
-    "prettier": "2.3.1",
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@types/jest": "^26.0.24",
+    "@types/jscodeshift": "^0.11.2",
+    "babel-jest": "^27.0.6",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "prettier": "2.3.2",
     "pretty-quick": "3.1.1",
     "react": "^17.0.2",
-    "ts-jest": "^27.0.3",
-    "typescript": "^4.3.4"
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
   }
 }
