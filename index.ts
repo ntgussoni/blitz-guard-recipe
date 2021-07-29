@@ -1,12 +1,9 @@
 import { RecipeBuilder, paths } from "@blitzjs/installer"
 import { transform as MiddlewareCodemod } from "./codemods/middleware"
-import j from "jscodeshift"
-
 import { join } from "path"
-import { Collection } from "jscodeshift/src/Collection"
 import { Transformer } from "@blitzjs/installer/dist/declarations/src/utils/transform"
 
-export default RecipeBuilder()
+const builder = RecipeBuilder()
   .setName("🛡️  Blitz Guard")
   .setDescription(
     `This recipe will install all necessary dependencies and configure Blitz Guard for immediate use.`
@@ -35,7 +32,9 @@ export default RecipeBuilder()
     templatePath: join(__dirname, "templates", "ability.ts"),
     templateValues: {},
   })
-  .addTransformFilesStep({
+
+if (paths.blitzConfig() !== "blitz.config.ts") {
+  builder.addTransformFilesStep({
     stepId: "addMiddleware",
     stepName: "Add development middleware",
     explanation: `Do you wish to add the development middleware to help you detect unprotected endpoints?`,
@@ -44,5 +43,14 @@ export default RecipeBuilder()
       return MiddlewareCodemod(program)
     },
   })
+} else {
+  builder.printMessage({
+    successIcon: "😭",
+    stepId: "oops",
+    stepName: "Im so sorry :(",
+    message:
+      "This recipe can't edit your blitz.config.ts (yet), you can add the Blitz Guard middleware following these two steps: https://ntgussoni.github.io/blitz-guard/docs/middleware",
+  })
+}
 
-  .build()
+export default builder.build()
